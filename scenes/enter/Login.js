@@ -8,7 +8,7 @@ export default function login() {
          <div className="min-w-min min-h-min p-4 bg-blue-600 flex flex-col rounded-3xl border-black border-2 drop-shadow-[0_35px_35px_rgba(0,5,0,0.6)]"> 
           <p className="m-auto">Enter in base</p>
           <div>
-          <input className="m-2"></input> Enter your login
+          <input className="m-2"></input> Enter your login change
           </div>
           <div>
           <input className="m-2"></input> Enter your password
