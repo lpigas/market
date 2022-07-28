@@ -1,12 +1,13 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import StandButtons from "../../components/atoms/Buttons/standart/StandButtons";
 
 export default function login() {
   const [showPass, setShowPass] = useState(false);
   const [loginData, setLoginData] = useState({ login: "", password: "" });
-
+  const router = useRouter();
   const test = () => {
-    console.log(loginData);
+    router.push("/buyer");
   };
   return (
     <div>
