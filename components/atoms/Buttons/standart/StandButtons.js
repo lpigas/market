@@ -3,7 +3,7 @@ import React from "react";
 const sizes = {
   sm: "w-12 h-12",
   xl: "w-24 h-12",
-  xxl: "w-36 h-12",
+  xxl: "w-48 h-12",
 };
 const colors = {
   blue: "bg-blue-700 border-2 rounded-xl border-white",
@@ -16,7 +16,7 @@ const colors = {
 export default function StandButtons({
   value,
   size = "xl",
-  color = blue,
+  color = 'blue',
   onClick,
 }) {
   return (

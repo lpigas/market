@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 export default function Header() {
+  const router = useRouter()
   const [groupData, setGroupData] = useState()
   const getbuyerGroup = async() => {
     try {
@@ -12,30 +14,34 @@ export default function Header() {
       const gets = await get.json()
       setGroupData(gets.message)
       } catch (error) {
-        // stop deleting state
-        // alert(error);
+        alert(error);
       }
   };
   useEffect(()=>{
     getbuyerGroup()
   },[])
+  const routGroup = groupName =>{
+    const group = groupName.toLowerCase()
+    router.push(`${router.asPath}/${group}`)
+  }
   typeof groupData !== 'undefined' && console.log(groupData)
   return (
-    <div className="min-h-56 flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{backgroundImage:"url('https://thumbs.dreamstime.com/z/b-letter-boutique-logo-design-159417325.jpg')"}}>
+      <div className="flex justify-between m-2 flex-wrap">
       {(groupData !== undefined )&&
       groupData.map(group =>
-      <div className="flex justify-between m-2 flex-wrap">
         <div
-          key={Math.random()+ group.img}
-          className={`w-4/12 h-56 flex text-2xl justify-center items-center bg-cover opacity-50 hover:opacity-100`}
+        key={Math.random()}
+          className={`m-2 w-3/12 h-56 flex text-4xl justify-center items-center bg-cover opacity-50 hover:opacity-100`}
           style={{backgroundImage: `url(${group.img})`}}
+          onClick={()=>routGroup(group.name)}
         >
           {group.name}
         </div>
-      </div>
       )
       
       }
+      </div>
     </div>
   );
 }
