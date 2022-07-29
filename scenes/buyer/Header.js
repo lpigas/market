@@ -38,7 +38,7 @@ export default function Header() {
           groupData.map((group) => (
             <div
               key={Math.random()}
-              className={`m-2 w-3/12 h-56 flex text-4xl justify-center items-center bg-cover opacity-50 hover:opacity-100`}
+              className={`m-2 w-3/12 text-white h-56 flex text-4xl justify-center items-center bg-cover opacity-50 hover:opacity-100`}
               style={{ backgroundImage: `url(${group.img})` }}
               onClick={() => routGroup(group.name)}
             >
