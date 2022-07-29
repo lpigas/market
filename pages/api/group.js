@@ -56,6 +56,5 @@ export default async function handler(req, res) {
     case "PUT": {
       return updateGroup(req, res);
     }
-
   }
 }

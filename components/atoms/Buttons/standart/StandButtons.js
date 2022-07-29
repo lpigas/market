@@ -16,7 +16,7 @@ const colors = {
 export default function StandButtons({
   value,
   size = "xl",
-  color = 'blue',
+  color = "blue",
   onClick,
 }) {
   return (
