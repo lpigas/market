@@ -15,7 +15,7 @@ export default function LayoutBuy({ children }) {
           color="lime"
         ></StandButton>
       </div>
-      <div> {children}</div>
+      <div className="w-11/12 m-auto"> {children}</div>
     </Titels>
   );
 }

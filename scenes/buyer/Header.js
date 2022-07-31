@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 export default function Header() {
   const router = useRouter();
   const [groupData, setGroupData] = useState();
+  const [routerGroup, setRouterGroup] = useState()
   const getbuyerGroup = async () => {
     try {
       // Delete post
@@ -22,9 +23,12 @@ export default function Header() {
   }, []);
   const routGroup = (groupName) => {
     const group = groupName.toLowerCase();
-    router.push(`${router.asPath}/${group}`);
+    if (typeof window !== "undefined") {
+      const data = window.localStorage.setItem('Group', JSON.stringify(group));
+    }
+    router.push(`${router.asPath}/products`);
   };
-  typeof groupData !== "undefined" && console.log(groupData);
+  
   return (
     <div
       className="min-h-screen flex flex-col"
