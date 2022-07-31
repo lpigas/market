@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 export default function Header() {
   const router = useRouter();
   const [groupData, setGroupData] = useState();
-  const [routerGroup, setRouterGroup] = useState()
   const getbuyerGroup = async () => {
     try {
       // Delete post
@@ -38,7 +37,7 @@ export default function Header() {
       }}
     >
       <div className="flex justify-between m-2 flex-wrap">
-        {groupData !== undefined &&
+        { typeof groupData !== 'undefined' &&
           groupData.map((group) => (
             <div
               key={Math.random()}
