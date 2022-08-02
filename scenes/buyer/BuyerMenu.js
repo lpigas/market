@@ -23,11 +23,11 @@ export default function Header() {
   const routGroup = (groupName) => {
     const group = groupName.toLowerCase();
     if (typeof window !== "undefined") {
-      const data = window.localStorage.setItem('Group', JSON.stringify(group));
+      const data = window.localStorage.setItem("Group", JSON.stringify(group));
     }
-    router.push(`${router.asPath}/products`);
+    router.push(`${router.asPath}/products?_limit=10&_page=1`);
   };
-  
+
   return (
     <div
       className="min-h-screen flex flex-col"
@@ -37,7 +37,7 @@ export default function Header() {
       }}
     >
       <div className="flex justify-between m-2 flex-wrap">
-        { typeof groupData !== 'undefined' &&
+        {typeof groupData !== "undefined" &&
           groupData.map((group) => (
             <div
               key={Math.random()}

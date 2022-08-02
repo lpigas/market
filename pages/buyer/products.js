@@ -1,70 +1,103 @@
-import { useRouter } from 'next/router'
-import React, { useState,useEffect } from 'react'
-import LayoutBuy from '../../components/layout/buyer/LayoutBuy'
-import EnterProduct from '../../scenes/buyer/EnterProduct'
-
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import LayoutBuy from "../../components/layout/buyer/LayoutBuy";
+import PageLimitBlock from "../../components/moleculs/PageLimitBlock/PageLimitBlock";
+import EnterProduct from "../../scenes/buyer/EnterProduct";
 
 export default function products() {
-  const [group, setGroup] = useState()
-  const [productData, setProductData] = useState([])
-  const router = useRouter()
-  const [loading, setLoading] = useState(true)
-  const [page, setPage] = useState(+router.query._page || 2)
-  const [limit, setLimit] = useState(+router.query._limit || 10)
-  
-
+  const [group, setGroup] = useState();
+  const [productData, setProductData] = useState([]);
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [numPage, setNumPage] = useState(router.query._page || 1);
+  const [fullLength, setFullLength] = useState(1);
+  const [limitPage, setLimitPage] = useState(+router.query._limit || 10);
+  const [totalPage, setTotalPage] = useState(Math.ceil(fullLength / limitPage));
 
   const addLocal = () => {
     if (typeof window !== "undefined") {
-      setGroup( JSON.parse(window.localStorage.getItem("Group")));
+      setGroup(JSON.parse(window.localStorage.getItem("Group")));
     }
   };
-  useEffect(()=>{
-    addLocal()
-    router.push(
-      `?_limit=${+router.query._limit || 10}&_page=${+router.query._page || 1}`
-    );
-  },[])
+  useEffect(() => {
+    addLocal();
+  }, []);
 
   useEffect(() => {
-    if(group){
-      getbuyerGroup()
+    setTotalPage(Math.ceil(fullLength / limitPage));
+  }, [fullLength]);
+
+  useEffect(() => {
+    if (group) {
+      getbuyerGroup();
     }
-  }, [group])
-  
+  }, [group]);
+
+  useEffect(() => {
+    getbuyerGroup();
+  }, [numPage]);
+
+  useEffect(() => {
+    setTotalPage(Math.ceil(fullLength / +router.query._limit));
+    if (Math.ceil(fullLength / +router.query._limit) < +router.query._page) {
+      router.push(
+        `?_limit=${router.query._limit}&_page=${Math.ceil(
+          fullLength / +router.query._limit
+        )}`
+      );
+    }
+    getbuyerGroup();
+  }, [limitPage]);
+
+  useEffect(() => {
+    setLimitPage(router.query._limit);
+    setNumPage(router.query._page);
+  }, [router]);
+
   const getbuyerGroup = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      // Delete post
       const get = await fetch(`${process.env.API_HOST}productdata`, {
         method: "GET",
-        'headers': {'infoGroup': group, page: page, limit: limit}
+        headers: { infoGroup: group, page: numPage, limit: limitPage },
       });
-      // reload the page
       const gets = await get.json();
-        setProductData(gets.message)
-
+      setProductData(gets.message.data);
+      setFullLength(gets.message.fulllength);
     } catch (error) {
       console.log(error);
-    } 
-    setLoading(false)
+    }
+    setLoading(false);
   };
-  console.log(productData)
+  // console.log(productData);
 
   return (
     <LayoutBuy>
-      <h1 className='text-3xl text-center'> {typeof group === 'undefined' ? 'Wait' : group.toUpperCase()} </h1>
-      {
-        loading ? 
-          <div className='text-xl text-center'> Waiting load</div>
-          : <div> 
-            {productData.length > 0 ?
-              <EnterProduct data={productData}/>
-              : <h2 className='text-xl text-center'> No product yet in this group</h2>
-            }
-          </div>
-      }
-
+      <h1 className="text-3xl text-center">
+        {" "}
+        {typeof group === "undefined" ? "Wait" : group.toUpperCase()}{" "}
+      </h1>
+      {loading ? (
+        <div className="text-xl text-center"> Waiting load</div>
+      ) : (
+        <div>
+          {productData.length > 0 && typeof productData !== "undefined" ? (
+            <div>
+              <PageLimitBlock
+                numPage={numPage}
+                totalPage={totalPage}
+                limitPage={limitPage}
+              />
+              <EnterProduct data={productData} />
+            </div>
+          ) : (
+            <h2 className="text-xl text-center">
+              {" "}
+              No product yet in this group
+            </h2>
+          )}
+        </div>
+      )}
     </LayoutBuy>
-  )
+  );
 }
