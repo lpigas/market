@@ -3,12 +3,11 @@ import React from "react";
 import Titels from "./components/Titels";
 import StandButton from "../../atoms/Buttons/standart/StandButtons";
 
-
 export default function LayoutBuy({ children }) {
   const router = useRouter();
   return (
     <Titels>
-      <div className="flex justify-between m-2">
+      <div className="flex justify-end m-2">
         <StandButton
           onClick={() => router.push("../buyer")}
           value="Back to Buyer Menu"
