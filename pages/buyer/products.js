@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
+import StandButtons from "../../components/atoms/Buttons/standart/StandButtons";
 import LayoutBuy from "../../components/layout/buyer/LayoutBuy";
 import PageLimitBlock from "../../components/moleculs/PageLimitBlock/PageLimitBlock";
 import EnterProduct from "../../scenes/buyer/EnterProduct";
@@ -64,12 +65,9 @@ export default function products() {
       const gets = await get.json();
       setProductData(gets.message.data);
       setFullLength(gets.message.fulllength);
-    } catch (error) {
-
-    }
+    } catch (error) {}
     setLoading(false);
   };
-
 
   return (
     <LayoutBuy>
@@ -81,7 +79,7 @@ export default function products() {
         <div className="text-xl text-center"> Waiting load</div>
       ) : (
         <div>
-          {typeof productData !== "undefined"&&productData.length > 0 ? (
+          {typeof productData !== "undefined" && productData.length > 0 ? (
             <div>
               <PageLimitBlock
                 numPage={numPage}

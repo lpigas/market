@@ -1,4 +1,1 @@
-export const testValid = (cart, data) => {
-    
-  };
-  
+export const testValid = (cart, data) => {};

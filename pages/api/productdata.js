@@ -38,11 +38,45 @@ async function getProduct(req, res) {
     });
   }
 }
+async function updateProduct(req, res) {
+  try {
+    // connect to the database
+    let { db } = await connectToDatabase();
+    let cartProducts = JSON.parse(req.body);
+    for (let i = 0; i < cartProducts.length; i++) {
+      await db.collection(cartProducts[i].group).updateOne(
+        {
+          _id: new ObjectId(cartProducts[i]._id),
+        },
+        {
+          $set: {
+            leftovers: +cartProducts[i].leftovers - +cartProducts[i].pcs,
+          },
+        }
+      );
+    }
+
+    // return a message
+    return res.json({
+      message: "all good",
+      success: true,
+    });
+  } catch (error) {
+    // return an error
+    return res.json({
+      message: new Error(error).message,
+      success: false,
+    });
+  }
+}
 export default async function handler(req, res) {
   // switch the methods
   switch (req.method) {
     case "GET": {
       return getProduct(req, res);
+    }
+    case "PUT": {
+      return updateProduct(req, res);
     }
   }
 }

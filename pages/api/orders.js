@@ -20,25 +20,24 @@ async function getOrders(req, res) {
   }
 }
 async function putOrders(req, res) {
-    try {
-      // connect to the database
-      let { db } = await connectToDatabase();
-      // add the post
-      await db.collection("orders").insertOne(JSON.parse(req.body));
-      // return a message
-      return res.json({
-        message: "Product added successfully",
-        success: true,
-      });
-    } catch (error) {
-      // return an error
-      return res.json({
-        message: new Error(error).message,
-        success: false,
-      });
-    }
+  try {
+    // connect to the database
+    let { db } = await connectToDatabase();
+    // add the post
+    await db.collection("orders").insertOne(JSON.parse(req.body));
+    // return a message
+    return res.json({
+      message: "Product added successfully",
+      success: true,
+    });
+  } catch (error) {
+    // return an error
+    return res.json({
+      message: new Error(error).message,
+      success: false,
+    });
   }
-
+}
 
 export default async function handler(req, res) {
   // switch the methods
