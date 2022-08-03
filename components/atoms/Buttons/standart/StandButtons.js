@@ -11,6 +11,7 @@ const colors = {
   orange: "bg-orange-600 border-2 rounded-xl border-white",
   amber: "bg-amber-400 border-2 rounded-xl border-white",
   lime: "bg-lime-600 border-2 rounded-xl border-white",
+  dark :'bg-gray-600 border-2 rounded-xl border-white text-white'
 };
 
 export default function StandButtons({
@@ -18,10 +19,11 @@ export default function StandButtons({
   size = "xl",
   color = "blue",
   onClick,
+  disabled=false,
 }) {
   return (
     <div>
-      <button className={`${sizes[size]} ${colors[color]}`} onClick={onClick}>
+      <button disabled={disabled} className={disabled?`${sizes[size]} ${colors['dark']}`:`${sizes[size]} ${colors[color]}`} onClick={onClick}>
         {value}
       </button>
     </div>

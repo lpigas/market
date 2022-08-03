@@ -11,6 +11,12 @@ export default function EnterProduct({ data }) {
   const [transit, setTransit] = useState([]);
   const [cartlength, setCartlength] = useState(0);
   const [focus, setFocus] = useState()
+  const [totalOrder, setTotalorder] = useState(0)
+  
+
+
+
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const dataCart = JSON.parse(window.localStorage.getItem("Cart"));
@@ -46,7 +52,7 @@ export default function EnterProduct({ data }) {
     const newProdCart = createCart(cart, transit);
     setCart([...newProdCart]);
   };
-  console.log(cart);
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -54,8 +60,41 @@ export default function EnterProduct({ data }) {
     }
     const length = cart.reduce((a, b) => a + b.pcs, 0);
     setCartlength(length);
+    const totalprice = cart.reduce((a, b) => a + (+b.pcs * +b.price), 0);
+    setTotalorder(totalprice)
+    
   }, [cart]);
 
+  const addOrderdb = async (newOrder) => {
+    console.log(newOrder)
+      try {
+        // add post
+        await fetch(`${process.env.API_HOST}orders`, {
+          method: "POST",
+          body: JSON.stringify(newOrder),
+        });
+        alert('aded')
+      } catch (error) {
+        // stop deleting state
+        // alert(error);
+      }
+  };
+
+
+  const agreeOrder = () =>{
+    const date = new Date()
+    const now = date.toLocaleString();
+    const newOrder = {'date': now, 'cart': cart, 'totalSum' : totalOrder}
+    addOrderdb(newOrder)
+    if (typeof window !== "undefined") {
+      const data = window.localStorage.setItem("Cart", JSON.stringify([]));
+    }
+    window.location.reload()
+  }
+  
+  
+
+  
   return (
     <div
       className="flex min-w-full my-4 flex-wrap "
@@ -106,6 +145,8 @@ export default function EnterProduct({ data }) {
             setVisible={setModalCart}
             change={changeValueCart}
             focus={focus}
+            agree={agreeOrder}
+            totalOrder={totalOrder}
           />
         </div>
       </MyModal>

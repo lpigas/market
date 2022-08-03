@@ -65,11 +65,11 @@ export default function products() {
       setProductData(gets.message.data);
       setFullLength(gets.message.fulllength);
     } catch (error) {
-      console.log(error);
+
     }
     setLoading(false);
   };
-  // console.log(productData);
+
 
   return (
     <LayoutBuy>
@@ -81,7 +81,7 @@ export default function products() {
         <div className="text-xl text-center"> Waiting load</div>
       ) : (
         <div>
-          {productData.length > 0 && typeof productData !== "undefined" ? (
+          {typeof productData !== "undefined"&&productData.length > 0 ? (
             <div>
               <PageLimitBlock
                 numPage={numPage}
