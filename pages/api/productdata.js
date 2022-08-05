@@ -69,6 +69,28 @@ async function updateProduct(req, res) {
     });
   }
 }
+
+async function putnewProduct(req, res) {
+  try {
+    // connect to the database
+    let { db } = await connectToDatabase();
+    // add the post
+    let collections = JSON.parse(req.body).group;
+    await db.collection(collections).insertOne(JSON.parse(req.body));
+    // return a message
+    return res.json({
+      message: "Product added successfully",
+      success: true,
+    });
+  } catch (error) {
+    // return an error
+    return res.json({
+      message: new Error(error).message,
+      success: false,
+    });
+  }
+}
+
 export default async function handler(req, res) {
   // switch the methods
   switch (req.method) {
@@ -77,6 +99,9 @@ export default async function handler(req, res) {
     }
     case "PUT": {
       return updateProduct(req, res);
+    }
+    case "POST": {
+      return putnewProduct(req, res);
     }
   }
 }

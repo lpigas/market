@@ -7,7 +7,7 @@ export default function login() {
   const [loginData, setLoginData] = useState({ login: "", password: "" });
   const router = useRouter();
   const test = () => {
-    router.push("/buyer");
+    router.push("/finteh");
   };
   return (
     <div>
