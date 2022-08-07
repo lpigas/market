@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
+import AddMany from "./components/AddMany";
 import AddOne from "./components/AddOne";
+import MyModal from '../../components/atoms/Modals/modal/MyModal'
 
 export default function NewProduct() {
+  const [modalAdd, setModalAdd] =useState(false)
   const [addoneMany, setAddoneMany] = useState("one");
   const [groupData, setGroupData] = useState([]);
   const [newproduct, setNewproduct] = useState({
     name: "",
-    price: 1,
+    price: 0,
     group: "",
     measurement: "",
     leftovers: 0,
-    id: 12,
+    id: 0,
   });
+  const [arrayallProduct, setArrayallProduct] = useState();
   const [valid, setValid] = useState(
     newproduct.leftovers > 0 &&
       newproduct.name.length > 0 &&
@@ -38,12 +42,14 @@ export default function NewProduct() {
     getbuyerGroup();
   }, []);
 
-  const putNewProduct = async () => {
+  const putNewProduct = async (product) => {
+    setModalAdd(true)
     try {
       await fetch(`${process.env.API_HOST}productdata`, {
         method: "POST",
-        body: JSON.stringify(newproduct),
+        body: JSON.stringify(product),
       });
+      setModalAdd(false)
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -60,15 +66,23 @@ export default function NewProduct() {
         newproduct.id.length > 0
     );
   }, [newproduct]);
-  const aded = () => {
-    valid && putNewProduct();
+
+  const addOne = () => {
+    valid && putNewProduct(newproduct);
   };
 
-  console.log(newproduct);
+  const addMany= ()=>{
+    // console.log(arrayallProduct);
+    for(let i = 0; i < arrayallProduct.length; i++){
+      console.log(arrayallProduct[i])
+      putNewProduct(arrayallProduct[i])
+    }
+  }
+
   return (
     <div
       className={`w-3/4 ${
-        addoneMany === "one" ? "h-4/6" : "h-3/5"
+        addoneMany === "one" ? "h-3/5" : "h-3/5"
       } bg-blue-500 rounded-3xl  border-2 block overflow-auto`}
     >
       <div className="flex">
@@ -90,19 +104,31 @@ export default function NewProduct() {
         </div>
       </div>
       {addoneMany === "one" && (
-        <div className="h-3/5 text-center ">
+        <div className="h-2/5 text-center ">
           <AddOne
             oneData={newproduct}
             setOneData={setNewproduct}
             group={groupData}
-            onClick={aded}
+            onClick={addOne}
             valid={valid}
           />
         </div>
       )}
       {addoneMany === "many" && (
-        <div className="h-3/5 text-center"> add many</div>
+        <div className="text-center">
+          <AddMany
+            oneData={newproduct}
+            group={groupData}
+            onClick={addMany}
+            setArrayallProduct={setArrayallProduct}
+          />
+        </div>
       )}
+      <MyModal visible={modalAdd} setVisible={setModalAdd} width={300}>
+        <div className="h-24 flex justify-center items-center">
+          Please waiting, add in DB now!!!
+          </div>
+      </MyModal>
     </div>
   );
 }

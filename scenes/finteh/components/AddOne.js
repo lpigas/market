@@ -61,6 +61,7 @@ export default function AddOne({ oneData, setOneData, group, onClick, valid }) {
             setOneData({ ...oneData, group: e.target.value.toLowerCase() })
           }
         >
+          <option>Change group</option>
           {group.map((item) => (
             <option key={item.name} value={item.name.toLowerCase()}>
               {item.name}
