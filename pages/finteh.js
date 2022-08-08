@@ -5,7 +5,7 @@ export default function finteh() {
   return (
     <LayoutFinteh>
       <div className="h-screen flex items-center justify-center">
-        <FullReportsBlock />
+        {/* <FullReportsBlock /> */}
       </div>
     </LayoutFinteh>
   );
