@@ -6,7 +6,7 @@ export default function FullReportsBlock() {
   const router = useRouter();
   return (
     <div className="w-1/4 h-3/4 bg-blue-500 flex p-4 rounded-3xl justify-center flex-wrap border-2 border-black">
-      <StandButtons size="xxl" value="Reports from orders" />
+      <StandButtons size="xxl" value="Reports from orders" onClick={()=> router.push('/finteh/reportorders')} />
       <StandButtons
         size="xxl"
         value="Change balances"

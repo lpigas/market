@@ -1,5 +1,5 @@
 import React from "react";
-import FullReportsBlock from "../scenes/finteh/fullReportsBlock";
+import FullReportsBlock from "../scenes/finteh/Fullreportsblock";
 import LayoutFinteh from "../components/layout/finteh/LayoutFinteh";
 
 export default function finteh() {
