@@ -6,7 +6,7 @@ const sizes = {
   xxl: "w-48 h-12",
 };
 const colors = {
-  blue: "bg-blue-700 border-2 rounded-xl border-white",
+  blue: "bg-blue-400 border-2 rounded-xl border-white",
   red: "bg-red-700 border-2 rounded-xl border-white",
   orange: "bg-orange-600 border-2 rounded-xl border-white",
   amber: "bg-amber-400 border-2 rounded-xl border-white",

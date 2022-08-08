@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AddMany from "./components/AddMany";
 import AddOne from "./components/AddOne";
-import MyModal from '../../components/atoms/Modals/modal/MyModal'
+import MyModal from "../../components/atoms/Modals/modal/MyModal";
 
 export default function NewProduct() {
-  const [modalAdd, setModalAdd] =useState(false)
+  const [modalAdd, setModalAdd] = useState(false);
   const [addoneMany, setAddoneMany] = useState("one");
   const [groupData, setGroupData] = useState([]);
   const [newproduct, setNewproduct] = useState({
@@ -43,13 +43,13 @@ export default function NewProduct() {
   }, []);
 
   const putNewProduct = async (product) => {
-    setModalAdd(true)
+    setModalAdd(true);
     try {
       await fetch(`${process.env.API_HOST}productdata`, {
         method: "POST",
         body: JSON.stringify(product),
       });
-      setModalAdd(false)
+      setModalAdd(false);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -71,13 +71,13 @@ export default function NewProduct() {
     valid && putNewProduct(newproduct);
   };
 
-  const addMany= ()=>{
+  const addMany = () => {
     // console.log(arrayallProduct);
-    for(let i = 0; i < arrayallProduct.length; i++){
-      console.log(arrayallProduct[i])
-      putNewProduct(arrayallProduct[i])
+    for (let i = 0; i < arrayallProduct.length; i++) {
+      console.log(arrayallProduct[i]);
+      putNewProduct(arrayallProduct[i]);
     }
-  }
+  };
 
   return (
     <div
@@ -127,7 +127,7 @@ export default function NewProduct() {
       <MyModal visible={modalAdd} setVisible={setModalAdd} width={300}>
         <div className="h-24 flex justify-center items-center">
           Please waiting, add in DB now!!!
-          </div>
+        </div>
       </MyModal>
     </div>
   );

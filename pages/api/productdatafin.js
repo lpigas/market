@@ -4,18 +4,15 @@ async function getProduct(req, res) {
   try {
     const group = req.headers.infogroup;
 
-
     // connect to the database
     let { db } = await connectToDatabase();
     // fetch the posts
     let product = await db.collection(group).find({}).toArray();
-      
 
     // return the posts
     return res.json({
       message: {
         data: JSON.parse(JSON.stringify(product)),
-
       },
       success: true,
     });
@@ -31,20 +28,19 @@ async function updateProduct(req, res) {
   try {
     // connect to the database
     let { db } = await connectToDatabase();
-    let cartProducts = JSON.parse(req.body);
-    for (let i = 0; i < cartProducts.length; i++) {
-      await db.collection(cartProducts[i].group).updateOne(
+    let product = JSON.parse(req.body);
+    for (let i = 0; i < product.length; i++) {
+      await db.collection(product[i].group).updateOne(
         {
-          _id: new ObjectId(cartProducts[i]._id),
+          _id: new ObjectId(product[i]._id),
         },
         {
           $set: {
-            leftovers: +cartProducts[i].leftovers - +cartProducts[i].pcs,
+            leftovers: +product[i].leftovers,
           },
         }
       );
     }
-
     // return a message
     return res.json({
       message: "all good",

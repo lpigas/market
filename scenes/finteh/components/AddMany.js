@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import StandButtons from "../../../components/atoms/Buttons/standart/StandButtons";
 import MyModal from "../../../components/atoms/Modals/modal/MyModal";
 
-
-
 export default function AddMany({
   setArrayallProduct,
   oneData,
@@ -13,47 +11,53 @@ export default function AddMany({
   const [full, setFull] = useState([]);
   const [display, setDisplay] = useState("flex");
   const [arrLength, setArrLength] = useState(0);
-  const [valid, setValid] = useState(false)
-  const [modalError, setModalError] = useState(false)
+  const [valid, setValid] = useState(false);
+  const [modalError, setModalError] = useState(false);
 
   const chageHowmany = () => {
     setDisplay("hidden");
-    const x =[]
+    const x = [];
     for (let i = 0; i < arrLength; i++) {
-      x.push({...oneData})
+      x.push({ ...oneData });
     }
-    setFull(x)
+    setFull(x);
   };
-  const changeData = (index,e,type)=>{
+  const changeData = (index, e, type) => {
     const fulls = full;
     fulls[index][type] = e;
-    setFull(fulls)
-  }
-  const added = () =>{
+    setFull(fulls);
+  };
+  const added = () => {
     const test = full;
-    let v = false
-    
-    for(let i = 0; i< test.length; i++){
-      v = test[i].id.length >0 && test[i].leftovers > 0 && test[i].name.length > 0 && test[i].price > 0 && test[i].group.length > 0 && test[i].measurement.length > 0
-      if (v=== false){
-        setModalError(true)
-        setTimeout(()=>{
-          setModalError(false)
-        }, 1500)
-        return v
-      }   
+    let v = false;
+
+    for (let i = 0; i < test.length; i++) {
+      v =
+        test[i].id.length > 0 &&
+        test[i].leftovers > 0 &&
+        test[i].name.length > 0 &&
+        test[i].price > 0 &&
+        test[i].group.length > 0 &&
+        test[i].measurement.length > 0;
+      if (v === false) {
+        setModalError(true);
+        setTimeout(() => {
+          setModalError(false);
+        }, 1500);
+        return v;
+      }
     }
-    setValid(v)
-    if (v){
-      setArrayallProduct(full)
-    } 
-  }
-  const reset = () =>{
-    setFull([])
-    setValid(false)
-    setDisplay('flex')
-    setArrayallProduct()
-  }
+    setValid(v);
+    if (v) {
+      setArrayallProduct(full);
+    }
+  };
+  const reset = () => {
+    setFull([]);
+    setValid(false);
+    setDisplay("flex");
+    setArrayallProduct();
+  };
 
   return (
     <div className="text-left m-5">
@@ -85,78 +89,178 @@ export default function AddMany({
             </tr>
           </thead>
           <tbody className="m-2">
-            {!valid ?
-            full.map((item, index) => (
-              <tr key={Math.random()}>
-                <td className={`w-1/12 border-2 my-2 `}>
-                <input placeholder="Id" disabled={valid} className={`w-full`} type={'text'} required onChange={e=> changeData(index, e.target.value, 'id')}/>
-                </td>
-                <td className="border-2 w-4/12">
-                  <input placeholder="Name" disabled={valid} className="w-full" onChange={e=> changeData(index, e.target.value, 'name')}/>
-                </td>
-                <td className="border-2 w-1/12">
-                  <input type={`number`} disabled={valid} placeholder="Price" className="w-full"  onChange={e=> changeData(index, +e.target.value, 'price')}/>
-                </td>
-                <td className="border-2 w-1/12">
-                  <input placeholder="Measurement" disabled={valid} className="w-full" onChange={e=> changeData(index, e.target.value, 'measurement')}/></td>
-                <td className="border-2 w-1/12">
-                  <input type={'number'}  disabled={valid} placeholder="Leftovers"  className="w-full" onChange={e=> changeData(index, e.target.value, 'leftovers')}/>
-                </td>
-                <td className="border-2 w-3/12">
-                  <select  className="w-full" disabled={valid} onChange={e=> changeData(index, e.target.value, 'group')}>
-                    <option>Change group</option>
-                    {group.map((item) => (
-                      <option key={item.name} value={item.name.toLowerCase()}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-              </tr>
-            ))
-            : full.map((item, index) => (
-              <tr key={Math.random()}>
-                <td className="border-2 w-1/12">
-                <input placeholder="Name" disabled={valid} className="w-full" value={item.id}/>
-                </td>
-                <td className="border-2 w-4/12">
-                  <input placeholder="Name" disabled={valid} className="w-full" value={item.name}/>
-                </td>
-                <td className="border-2 w-1/12">
-                  <input type={`number`} disabled={valid} placeholder="Price" className="w-full" value={item.price}/>
-                </td>
-                <td className="border-2 w-1/12">
-                  <input placeholder="Measurement" disabled={valid} className="w-full" value={item.measurement}/></td>
-                <td className="border-2 w-1/12">
-                  <input type={'number'}  disabled={valid} placeholder="Leftovers"  className="w-full" value={item.leftovers}/>
-                </td>
-                <td className="border-2 w-3/12">
-                  <select  className="w-full" disabled={valid} value={item.group}>
-                    <option>Change group</option>
-                    {group.map((item) => (
-                      <option key={item.name} value={item.name.toLowerCase()}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-              </tr>
-            ))
-          }
-            
+            {!valid
+              ? full.map((item, index) => (
+                  <tr key={Math.random()}>
+                    <td className={`w-1/12 border-2 my-2 `}>
+                      <input
+                        placeholder="Id"
+                        disabled={valid}
+                        className={`w-full`}
+                        type={"text"}
+                        required
+                        onChange={(e) =>
+                          changeData(index, e.target.value, "id")
+                        }
+                      />
+                    </td>
+                    <td className="border-2 w-4/12">
+                      <input
+                        placeholder="Name"
+                        disabled={valid}
+                        className="w-full"
+                        onChange={(e) =>
+                          changeData(index, e.target.value, "name")
+                        }
+                      />
+                    </td>
+                    <td className="border-2 w-1/12">
+                      <input
+                        type={`number`}
+                        disabled={valid}
+                        placeholder="Price"
+                        className="w-full"
+                        onChange={(e) =>
+                          changeData(index, +e.target.value, "price")
+                        }
+                      />
+                    </td>
+                    <td className="border-2 w-1/12">
+                      <input
+                        placeholder="Measurement"
+                        disabled={valid}
+                        className="w-full"
+                        onChange={(e) =>
+                          changeData(index, e.target.value, "measurement")
+                        }
+                      />
+                    </td>
+                    <td className="border-2 w-1/12">
+                      <input
+                        type={"number"}
+                        disabled={valid}
+                        placeholder="Leftovers"
+                        className="w-full"
+                        onChange={(e) =>
+                          changeData(index, e.target.value, "leftovers")
+                        }
+                      />
+                    </td>
+                    <td className="border-2 w-3/12">
+                      <select
+                        className="w-full"
+                        disabled={valid}
+                        onChange={(e) =>
+                          changeData(index, e.target.value, "group")
+                        }
+                      >
+                        <option>Change group</option>
+                        {group.map((item) => (
+                          <option
+                            key={item.name}
+                            value={item.name.toLowerCase()}
+                          >
+                            {item.name}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                  </tr>
+                ))
+              : full.map((item, index) => (
+                  <tr key={Math.random()}>
+                    <td className="border-2 w-1/12">
+                      <input
+                        placeholder="Name"
+                        disabled={valid}
+                        className="w-full"
+                        value={item.id}
+                      />
+                    </td>
+                    <td className="border-2 w-4/12">
+                      <input
+                        placeholder="Name"
+                        disabled={valid}
+                        className="w-full"
+                        value={item.name}
+                      />
+                    </td>
+                    <td className="border-2 w-1/12">
+                      <input
+                        type={`number`}
+                        disabled={valid}
+                        placeholder="Price"
+                        className="w-full"
+                        value={item.price}
+                      />
+                    </td>
+                    <td className="border-2 w-1/12">
+                      <input
+                        placeholder="Measurement"
+                        disabled={valid}
+                        className="w-full"
+                        value={item.measurement}
+                      />
+                    </td>
+                    <td className="border-2 w-1/12">
+                      <input
+                        type={"number"}
+                        disabled={valid}
+                        placeholder="Leftovers"
+                        className="w-full"
+                        value={item.leftovers}
+                      />
+                    </td>
+                    <td className="border-2 w-3/12">
+                      <select
+                        className="w-full"
+                        disabled={valid}
+                        value={item.group}
+                      >
+                        <option>Change group</option>
+                        {group.map((item) => (
+                          <option
+                            key={item.name}
+                            value={item.name.toLowerCase()}
+                          >
+                            {item.name}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       )}
       <div className="m-2 text-right">
-      <StandButtons size="xxl" color="lime" onClick={added} value={"Test all aded"}></StandButtons>
+        <StandButtons
+          size="xxl"
+          color="lime"
+          onClick={added}
+          value={"Test all aded"}
+        ></StandButtons>
       </div>
       <div className="m-2 flex justify-end">
-
-      <StandButtons size="xl" color={'amber'} value={'Reset'} onClick={reset}/>
-      <StandButtons size="xl" color={valid ? 'amber' : 'dark'} disabled={!valid} value={'Add'} onClick={onClick}/>
+        <StandButtons
+          size="xl"
+          color={"amber"}
+          value={"Reset"}
+          onClick={reset}
+        />
+        <StandButtons
+          size="xl"
+          color={valid ? "amber" : "dark"}
+          disabled={!valid}
+          value={"Add"}
+          onClick={onClick}
+        />
       </div>
       <MyModal visible={modalError} setVisible={setModalError} width={500}>
-          <div className="flex justify-center items-center text-3xl h-24"> Error, please fill in all fields </div>
+        <div className="flex justify-center items-center text-3xl h-24">
+          {" "}
+          Error, please fill in all fields{" "}
+        </div>
       </MyModal>
     </div>
   );
