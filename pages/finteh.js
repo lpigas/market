@@ -9,7 +9,7 @@ export default function finteh() {
   return (
     <LayoutFinteh>
       <div className="h-screen flex items-center justify-center flex-col">
-        <div className=" bg-cyan-500 flex flex-col h-96 item-center justify-center px-14 rounded-2xl">
+        <div className=" bg-cyan-500 flex flex-col h-96 item-center justify-center px-14 rounded-2xl drop-shadow-[0_15px_15px_rgba(0,5,0,0.6)]">
           <div className="my-2">
       <StandButtons size="xxl" value="Reports from orders" onClick={()=> router.push('/finteh/reportorders')} />
           </div>

@@ -6,11 +6,11 @@ const sizes = {
   xxl: "w-48 h-12",
 };
 const colors = {
-  blue: "bg-blue-400 border-2 rounded-xl border-white",
-  red: "bg-red-700 border-2 rounded-xl border-white",
-  orange: "bg-orange-600 border-2 rounded-xl border-white",
-  amber: "bg-amber-400 border-2 rounded-xl border-white",
-  lime: "bg-lime-600 border-2 rounded-xl border-white",
+  blue: "bg-blue-400 border-2 rounded-xl border-white active:bg-gray-500",
+  red: "bg-red-700 border-2 rounded-xl border-white active:bg-gray-500 ",
+  orange: "bg-orange-600 border-2 rounded-xl border-white active:bg-gray-500",
+  amber: "bg-amber-400 border-2 rounded-xl border-white active:bg-gray-500",
+  lime: "bg-lime-600 border-2 rounded-xl border-white active:bg-gray-500 drop-shadow-[0_15px_15px_rgba(0,5,0,0.6)]",
   dark: "bg-gray-600 border-2 rounded-xl border-white text-white",
 };
 

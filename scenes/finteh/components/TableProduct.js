@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TableProduct({ data, chahgeData }) {
   return (
-    <table className="border-2 bg-blue-600 border-black">
+    <table className="border-2 bg-blue-600 border-black drop-shadow-[0_15px_15px_rgba(0,5,0,0.6)]">
       <thead className="p-2">
         <tr>
           <td className="border-2 text-center w-1/12">Id</td>

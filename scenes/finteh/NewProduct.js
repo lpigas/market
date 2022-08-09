@@ -83,7 +83,7 @@ export default function NewProduct() {
     <div
       className={`w-3/4 ${
         addoneMany === "one" ? "h-3/5" : "h-3/5"
-      } bg-blue-500 rounded-3xl  border-2 block overflow-auto`}
+      } bg-blue-500 drop-shadow-[0_15px_15px_rgba(0,5,0,0.6)] rounded-3xl  border-2 block overflow-auto`}
     >
       <div className="flex">
         <div

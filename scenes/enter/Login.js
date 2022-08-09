@@ -6,8 +6,12 @@ export default function login() {
   const [showPass, setShowPass] = useState(false);
   const [loginData, setLoginData] = useState({ login: "", password: "" });
   const router = useRouter();
-  const test = () => {
-    router.push("/finteh");
+  const enter = () => {
+    if(loginData.login === '1' && loginData.password === '1'){
+      router.push("/finteh");
+    } else if(loginData.login === '2' && loginData.password === '2'){
+      router.push('/buyer')
+    }
   };
   return (
     <div>
@@ -41,7 +45,7 @@ export default function login() {
           Show password
         </label>
         <div className="m-2 text-right">
-          <StandButtons value={"Enter"} size="xl" color="lime" onClick={test} />
+          <StandButtons value={"Enter"} size="xl" color="lime" onClick={enter} />
         </div>
       </div>
     </div>

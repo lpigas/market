@@ -2,13 +2,16 @@ const { connectToDatabase } = require("../../lib/mongodb");
 const ObjectId = require("mongodb").ObjectId;
 async function getOrders(req, res) {
   try {
+    let date = JSON.parse(JSON.stringify(req.headers)).infodate;
+
     // connect to the database
     let { db } = await connectToDatabase();
     // fetch the posts
-    let product = await db.collection("orders").find({}).toArray();
+    let orders = await db.collection("orders").find({ date: { $regex: date } }).toArray();
     // return the posts
     return res.json({
-      message: JSON.parse(JSON.stringify(product)),
+      // message: JSON.parse(JSON.stringify(product)),
+      message: orders,
       success: true,
     });
   } catch (error) {

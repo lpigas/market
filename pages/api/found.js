@@ -1,5 +1,6 @@
 const { connectToDatabase } = require("../../lib/mongodb");
 const ObjectId = require("mongodb").ObjectId;
+
 async function foundProduct(req, res) {
   try {
     let group = JSON.parse(JSON.stringify(req.headers)).group;

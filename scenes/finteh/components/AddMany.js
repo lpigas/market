@@ -233,21 +233,23 @@ export default function AddMany({
           </tbody>
         </table>
       )}
-      <div className="m-2 text-right">
+      <div className="m-4 text-right">
         <StandButtons
           size="xxl"
-          color="lime"
+          color="blue"
           onClick={added}
           value={"Test all aded"}
         ></StandButtons>
       </div>
       <div className="m-2 flex justify-end">
+        <div className="mx-4">
         <StandButtons
           size="xl"
           color={"amber"}
           value={"Reset"}
           onClick={reset}
         />
+        </div>
         <StandButtons
           size="xl"
           color={valid ? "amber" : "dark"}

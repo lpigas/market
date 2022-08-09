@@ -50,7 +50,6 @@ export default function Balances() {
   }, [groupFound]);
 
   const foundProduct = async () => {
-    console.log(found);
     try {
       const get = await fetch(`${process.env.API_HOST}found`, {
         method: "GET",
@@ -79,6 +78,7 @@ export default function Balances() {
   const changeBalsnce = () => {
     sendNewStok();
   };
+  console.log(productData)
   const founds = () => {
     foundProduct();
   };
@@ -88,7 +88,7 @@ export default function Balances() {
       <div className="w-10/12 h-5/6 m-4">
         <select
           onChange={(e) => setGroupFound(e.target.value.toLowerCase())}
-          className={`border-2 p-2 border-black`}
+          className={`border-2 p-2 border-black `}
         >
           <option>Groupe</option>
           {group &&
@@ -98,13 +98,15 @@ export default function Balances() {
               </option>
             ))}
         </select>
-        <div className="flex justify-center items-center" id="found">
+        {!group ?
+        <div className="text-center"> Please, waiting ...</div>
+        :<div className="flex justify-center items-center" id="found">
           <input
             className="h-6  border-2 border-black mx-6"
             onChange={(e) => setFound(e.target.value)}
           ></input>
           <StandButtons onClick={founds} value={"Found"} />{" "}
-        </div>
+        </div>}
         {productData && (
           <div className="border-4 my-4 border-black rounded-2xl">
             <TableProduct chahgeData={changeData} data={productData} />
@@ -115,6 +117,7 @@ export default function Balances() {
             value={"Change "}
             color="blue"
             onClick={changeBalsnce}
+            disabled={!productData? true: false}
           />
         </div>
       </div>
