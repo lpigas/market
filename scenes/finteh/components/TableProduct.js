@@ -28,7 +28,9 @@ export default function TableProduct({ data, chahgeData }) {
                   <input
                     type={"number"}
                     className={"w-1/2 mx-3"}
-                    onChange={(e) => chahgeData(index, +e.target.value)}
+                    onChange={(e) =>
+                      chahgeData(index, item.leftovers + +e.target.value)
+                    }
                   ></input>
                 </div>
               </td>

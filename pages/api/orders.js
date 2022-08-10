@@ -7,7 +7,10 @@ async function getOrders(req, res) {
     // connect to the database
     let { db } = await connectToDatabase();
     // fetch the posts
-    let orders = await db.collection("orders").find({ date: { $regex: date } }).toArray();
+    let orders = await db
+      .collection("orders")
+      .find({ date: { $regex: date } })
+      .toArray();
     // return the posts
     return res.json({
       // message: JSON.parse(JSON.stringify(product)),

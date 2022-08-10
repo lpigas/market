@@ -243,12 +243,12 @@ export default function AddMany({
       </div>
       <div className="m-2 flex justify-end">
         <div className="mx-4">
-        <StandButtons
-          size="xl"
-          color={"amber"}
-          value={"Reset"}
-          onClick={reset}
-        />
+          <StandButtons
+            size="xl"
+            color={"amber"}
+            value={"Reset"}
+            onClick={reset}
+          />
         </div>
         <StandButtons
           size="xl"

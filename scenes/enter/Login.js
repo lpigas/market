@@ -7,10 +7,10 @@ export default function login() {
   const [loginData, setLoginData] = useState({ login: "", password: "" });
   const router = useRouter();
   const enter = () => {
-    if(loginData.login === '1' && loginData.password === '1'){
+    if (loginData.login === "1" && loginData.password === "1") {
       router.push("/finteh");
-    } else if(loginData.login === '2' && loginData.password === '2'){
-      router.push('/buyer')
+    } else if (loginData.login === "2" && loginData.password === "2") {
+      router.push("/buyer");
     }
   };
   return (
@@ -45,7 +45,12 @@ export default function login() {
           Show password
         </label>
         <div className="m-2 text-right">
-          <StandButtons value={"Enter"} size="xl" color="lime" onClick={enter} />
+          <StandButtons
+            value={"Enter"}
+            size="xl"
+            color="lime"
+            onClick={enter}
+          />
         </div>
       </div>
     </div>
